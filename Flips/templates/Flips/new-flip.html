@@ -15,13 +15,24 @@
         </div>
         <div class="options">
             <div class="choices">
-                <label for="option-a" id="option-a-weighting">Option A: 50%</label>
-                <input type="text" placeholder="Heads" id="option-a" value="Heads">
-                <label for="option-b" id="option-b-weighting">Option B: 50%</label>
-                <input type="text" placeholder="Tails" id="option-b" value="Tails">
+                <div class="names">
+                    <input type="text" placeholder="Heads" id="option-a" value="">
+                    <input type="text" placeholder="Tails" id="option-b" value="">
+                </div>
 
-                <label for="weighting">Weighting</label>
-                <input type="range" min="1" max="99" value="50" id="weighting">
+                <div class="weighting">
+                    <label class="weighting-label" for="weighting" id="option-a-weighting"><span>Option A: 50%</span></label>
+                    <input type="range" min="1" max="99" value="50" id="weighting">
+                    <label class="weighting-label" for="weighting" id="option-b-weighting"><span>Option B: 50%</span></label>
+                </div>
+
+                <div class="privacy">
+                    <p id="privacy-label">Private</p>
+                    <label class="switch">
+                      <input type="checkbox" id="privacy">
+                      <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
     </div>

@@ -6,9 +6,11 @@ let old_slider_value = weighting_slider.value;
 let option_a_weight = 0;
 let option_b_weight = 0;
 
-let option_a_weighting_label = document.getElementById("option-a-weighting");
-let option_b_weighting_label = document.getElementById("option-b-weighting");
+let option_a_weighting_label = document.getElementById("option-a-weighting").getElementsByTagName("span")[0];
+let option_b_weighting_label = document.getElementById("option-b-weighting").getElementsByTagName("span")[0];
 
+let privacy_btn = document.getElementById("privacy");
+let is_private = false;
 
 function update_weighting_labels(a, b) {
     let label_a = `Option A: ${Math.floor(a * 100)}%`;
@@ -32,3 +34,8 @@ setInterval(() => {
 
     update_weighting_labels(option_a_weight, option_b_weight);
 }, 25);
+
+privacy_btn.addEventListener("change", () => {
+    is_private = !is_private;
+});
+
