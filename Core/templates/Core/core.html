@@ -5,11 +5,57 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'Core/core.css' %}">
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}Coin Flip Decisions{% endblock title %}</title>
     {% block head %} {% endblock %}
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <!-- I would ask why you're peaking at my HTML, then again it's probably the same reason I made this site, why not. -->
+    <div class="nav-bar">
+        <div class="nav-bar-content">
+            {# Left -> Right #}
+            <div class="nav-bar-content">
+                {# Site Label #}
+                <a href="/" style="text-decoration: none;color: inherit" ><h3>Coin Flip Decisions</h3></a>
+            </div>
+            <div class="nav-bar-content">
+                {# Personal #}
+                <div id="home">
+                    <a href="/">
+                        <h4>Recent Flips</h4>
+                    </a>
+                </div>
+                {% if user.is_authenticated %}
+                    <div id="my-flips">
+                        <a href="#myflips">
+                            <h4>My Flips</h4>
+                        </a>
+                    </div>
+                    <div id="new-flip">
+                        <a href="#newflip">
+                            <h4>New Flip</h4>
+                        </a>
+                    </div>
+                    <div id="account">
+                        <a href="#profile">
+                            <div class="nav-bar-content-img">
+                                <img class="nav-bar-account-img" src="{% static 'Core/account.svg' %}" alt="Profile">
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div id="account">
+                        <a href="#signinlogin">
+                            <h4>Sign In | Login</h4>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
 </body>
 </html>
