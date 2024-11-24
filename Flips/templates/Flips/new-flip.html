@@ -1,0 +1,28 @@
+{% extends 'Core/core.html' %}
+{% load static %}
+
+{% block title %}New Flip{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Flips/new-flip.css' %}">
+    <script src="{% static 'Flips/new-flips.js' %}" defer></script>
+{% endblock head %}
+
+{% block content %}
+    <div class="content">
+        <div class="coin">
+            coin
+        </div>
+        <div class="options">
+            <div class="choices">
+                <label for="option-a" id="option-a-weighting">Option A: 50%</label>
+                <input type="text" placeholder="Heads" id="option-a" value="Heads">
+                <label for="option-b" id="option-b-weighting">Option B: 50%</label>
+                <input type="text" placeholder="Tails" id="option-b" value="Tails">
+
+                <label for="weighting">Weighting</label>
+                <input type="range" min="1" max="99" value="50" id="weighting">
+            </div>
+        </div>
+    </div>
+{% endblock content %}

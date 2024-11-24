@@ -1,0 +1,21 @@
+.content {
+    margin-top: 2vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.coin {
+    background-color: #fdfdfd;
+    margin: 0 auto;
+    height: 40vh;
+    width: 50vw;
+}
+
+.options {
+    margin: 0 auto;
+    height: 40vh;
+    width: 50vw;
+
+}
