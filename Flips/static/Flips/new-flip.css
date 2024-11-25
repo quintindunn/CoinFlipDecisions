@@ -6,13 +6,6 @@
     flex-direction: column;
 }
 
-.coin {
-    background-color: #fdfdfd;
-    margin: 0 auto;
-    height: 40vh;
-    width: 50vw;
-}
-
 .options {
     margin: 0 auto;
     height: 40vh;
@@ -126,4 +119,31 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.create-flip {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.create-flip > button {
+    border-radius: .5vh;
+    width: 5vw;
+    height: 6vh;
+    background-color: #ffffff;
+    border: 2px solid lightblue;
+}
+
+.create-flip > button > p {
+    font-weight: bold;
+    font-size: .75vw;
+}
+
+.create-flip > button:active {
+    background-color: #fafafa;
+}
+
+.create-flip > button:active > p {
+    font-size: .8vw;
 }

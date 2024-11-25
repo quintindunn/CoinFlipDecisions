@@ -1,0 +1,51 @@
+:root {
+    --scale: 4;
+}
+
+.coin-box {
+    background-color: #fdfdfd;
+    margin: 0 auto;
+    height: 40vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.coin {
+    top: calc((40vh - (8vh * var(--scale))) / 2);
+    width: calc(8vh * var(--scale));
+    height: calc(8vh * var(--scale));
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.25s;
+}
+
+.coin[data-flipped="true"] {
+    transform: rotateY(180deg);
+}
+
+.coin-face {
+    border-radius: 50%;
+    border: 3px solid #b59e06;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: calc(8vh * var(--scale));
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: calc(2.5vh * var(--scale));
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.coin-face-a {
+    background: #ead43a;
+}
+
+.coin-face-b {
+    background: #ead43a;
+    transform: rotateY(180deg);
+}

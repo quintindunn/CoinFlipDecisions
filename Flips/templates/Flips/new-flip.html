@@ -5,13 +5,26 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'Flips/new-flip.css' %}">
+    <link rel="stylesheet" href="{% static 'Flips/coin.css' %}">
     <script src="{% static 'Flips/new-flips.js' %}" defer></script>
+    <script src="{% static 'Flips/coin.js' %}" defer></script>
 {% endblock head %}
 
 {% block content %}
     <div class="content">
-        <div class="coin">
-            coin
+        <div class="coin-box">
+            <div class="coin">
+                <div class="coin-face coin-face-a">
+                    <div class="label">
+                        Heads
+                    </div>
+                </div>
+                <div class="coin-face coin-face-b">
+                    <div class="label">
+                        Tails
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="options">
             <div class="choices">
@@ -32,6 +45,10 @@
                       <input type="checkbox" id="privacy">
                       <span class="slider round"></span>
                     </label>
+                </div>
+
+                <div class="create-flip">
+                    <button id="create-flip"><p>Create Flip</p></button>
                 </div>
             </div>
         </div>
