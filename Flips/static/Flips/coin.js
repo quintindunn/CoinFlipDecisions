@@ -12,12 +12,17 @@ function flip() {
   coin.dataset.flipped = flipped ? "true" : "false";
 }
 
-function set_option(opt_a = false) {
-  if(opt_a && flipped) {
-    flip();
-  } else if (!opt_a && !flipped) {
-    flip();
+function set_option(is_a) {
+  console.log(is_a);
+  if (is_a) {
+    console.log(1);
+    flipped = false;
+    coin.dataset.flipped = "false";
+    return
   }
+  console.log(2);
+  flipped = true;
+  coin.dataset.flipped = "true";
 }
 
 function do_flip(result_a) {
@@ -28,16 +33,16 @@ function do_flip(result_a) {
   let interval = setInterval(() => {
     if (i >= dynamic_flipping_time / TIME_PER_FLIP) {
       clearInterval(interval);
+      set_option(result_a);
       setTimeout(() => {
         results.dataset.hidden = "false";
       }, TIME_PER_FLIP*1000)
 
     }
-    flip();
+    if (!(i >= dynamic_flipping_time / TIME_PER_FLIP))
+      flip();
     i++;
   }, TIME_PER_FLIP*1000);
-  set_option(result_a);
-
-
+  set_option(result_a)
   return result_a;
 }
