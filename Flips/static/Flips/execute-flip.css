@@ -1,0 +1,49 @@
+.flip {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.flip > button {
+    height: 6vh;
+    width: 8vw;
+    border-radius: 15px;
+    border: 2px solid lightblue;
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: #ffffff;
+}
+
+.flip > button:active {
+    background-color: #fafafa;
+}
+
+.flip > button:hover {
+    cursor: pointer;
+}
+
+.outcome-meaning {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    gap: 4vw;
+}
+
+.outcome-meaning > div {
+    text-align: center;
+    width: 16vw;
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.results[data-hidden="true"] {
+    display: none;
+}
