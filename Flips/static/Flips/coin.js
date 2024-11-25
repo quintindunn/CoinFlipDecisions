@@ -36,8 +36,3 @@ function do_flip(weight_a) {
   set_option(opt_a);
   return opt_a;
 }
-
-// Dev Code
-coin.addEventListener( 'click', () => {
-  do_flip(0.35);
-});

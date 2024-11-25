@@ -12,6 +12,8 @@ let option_b_weighting_label = document.getElementById("option-b-weighting").get
 let privacy_btn = document.getElementById("privacy");
 let is_private = false;
 
+let example_coin = document.querySelector(".coin");
+
 function update_weighting_labels(a, b) {
     let label_a = `Option A: ${Math.floor(a * 100)}%`;
     let label_b = `Option B: ${Math.floor(b * 100)}%`;
@@ -39,3 +41,6 @@ privacy_btn.addEventListener("change", () => {
     is_private = !is_private;
 });
 
+example_coin.addEventListener("click", () => {
+    flip();
+})

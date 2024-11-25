@@ -19,7 +19,7 @@
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 0.25s;
+    transition: transform 0.5s;
 }
 
 .coin[data-flipped="true"] {
@@ -32,13 +32,18 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    line-height: calc(8vh * var(--scale));
     color: white;
     text-align: center;
     font-weight: bold;
     font-size: calc(2.5vh * var(--scale));
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+}
+
+.coin-face > .label > p {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .coin-face-a {
@@ -49,3 +54,4 @@
     background: #ead43a;
     transform: rotateY(180deg);
 }
+

@@ -147,3 +147,7 @@ input:checked + .slider:before {
 .create-flip > button:active > p {
     font-size: .8vw;
 }
+
+button#create-flip:hover {
+    cursor: pointer;
+}
