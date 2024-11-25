@@ -1,7 +1,7 @@
 import random
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
 
 from .models import Flip
@@ -43,7 +43,7 @@ def new_flip(request):
                 option_b_weight=weighting, private=private, user=request.user)
     flip.save()
 
-    return render(request, "Flips/new-flip.html")
+    return redirect("execute-flip", pk=flip.uuid)
 
 
 def execute_flip(request, pk: str):
@@ -63,7 +63,7 @@ def execute_flip(request, pk: str):
     }
 
     # Process it server-side to prevent people from making false HTTP requests
-    if flip.outcome == 0 or True:
+    if flip.outcome == 0:
         flip.outcome = int(random.random() > flip.option_a_weight) + 1  # 0 == not processed, 1 == Heads 2, == Tails
         flip.save()
         ctx["first_flip"] = True
