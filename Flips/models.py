@@ -20,7 +20,7 @@ class Flip(models.Model):
     outcome = models.IntegerField(default=0)  # 0 == not processed, 1 == Heads 2, == Tails
     outcome_rating = models.IntegerField(default=0)  # 0 == unrated, 1 == Bad, 2 == Neutral, 3 == Happy
 
-    comment = models.CharField(max_length=256, default="")
+    comment = models.CharField(max_length=256, default="", blank=True)
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
