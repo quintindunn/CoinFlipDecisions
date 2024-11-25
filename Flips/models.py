@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -13,3 +14,9 @@ class Flip(models.Model):
     outcome_rating = models.IntegerField(default=0)  # 0 == unrated, 1 == Bad, 2 == Neutral, 3 == Happy
     comment = models.CharField(max_length=256, default="")
 
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='posts'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)

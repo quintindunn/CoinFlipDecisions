@@ -28,28 +28,31 @@
         </div>
         <div class="options">
             <div class="choices">
-                <div class="names">
-                    <input type="text" placeholder="Heads" id="option-a" value="" maxlength="128">
-                    <input type="text" placeholder="Tails" id="option-b" value="" maxlength="128">
-                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="names">
+                        <input name="option-a" type="text" placeholder="Heads" id="option-a" value="" maxlength="128" required>
+                        <input name="option-b" type="text" placeholder="Tails" id="option-b" value="" maxlength="128" required>
+                    </div>
 
-                <div class="weighting">
-                    <label class="weighting-label" for="weighting" id="option-a-weighting"><span>Option A: 50%</span></label>
-                    <input type="range" min="1" max="99" value="50" id="weighting">
-                    <label class="weighting-label" for="weighting" id="option-b-weighting"><span>Option B: 50%</span></label>
-                </div>
+                    <div class="weighting">
+                        <label class="weighting-label" for="weighting" id="option-a-weighting"><span>Option A: 50%</span></label>
+                        <input type="range" min="1" max="99" value="50" id="weighting" name="weighting">
+                        <label class="weighting-label" for="weighting" id="option-b-weighting"><span>Option B: 50%</span></label>
+                    </div>
 
-                <div class="privacy">
-                    <p id="privacy-label">Private</p>
-                    <label class="switch">
-                      <input type="checkbox" id="privacy">
-                      <span class="slider round"></span>
-                    </label>
-                </div>
+                    <div class="privacy">
+                        <p id="privacy-label">Private</p>
+                        <label class="switch">
+                          <input type="checkbox" id="privacy" name="private">
+                          <span class="slider round"></span>
+                        </label>
+                    </div>
 
-                <div class="create-flip">
-                    <button id="create-flip"><p>Create Flip</p></button>
-                </div>
+                    <div class="create-flip">
+                        <button id="create-flip" type="submit"><p>Create Flip</p></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

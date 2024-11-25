@@ -31,14 +31,15 @@ setInterval(() => {
 
     slider_value = slider_value / 100;
 
-    option_a_weight = slider_value;
-    option_b_weight = 1-slider_value;
+    option_a_weight = 1-slider_value;
+    option_b_weight = slider_value;
 
     update_weighting_labels(option_a_weight, option_b_weight);
 }, 25);
 
 privacy_btn.addEventListener("change", () => {
     is_private = !is_private;
+    privacy_btn.value = is_private;
 });
 
 example_coin.addEventListener("click", () => {
