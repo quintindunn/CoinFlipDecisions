@@ -74,6 +74,6 @@ def execute_flip(request, pk: str):
 def my_flips(request):
     flips = request.user.flips.all()
     ctx = {
-        "flips": flips
+        "flips": flips[::-1]
     }
     return render(request, "Flips/my-flips.html", context=ctx)
