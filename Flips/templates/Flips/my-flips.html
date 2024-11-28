@@ -42,10 +42,10 @@
                             </div>
                         {% endif %}
                         <div class="option">
-                            <span class="options-type">Heads: </span><span>50%</span>
+                            <span class="options-type">Heads: </span><span>{% widthratio flip.option_a_weight 1 100 %}%</span>
                         </div>
                         <div class="option">
-                            <span class="options-type">Tails: </span><span>50%</span>
+                            <span class="options-type">Tails: </span><span>{% widthratio flip.option_b_weight 1 100 %}%</span>
                         </div>
                     </div>
                 </div>
