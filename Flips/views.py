@@ -91,3 +91,11 @@ def rate(request):
     print(flip)
 
     return HttpResponse("200")
+
+  
+def my_flips(request):
+    flips = request.user.flips.all()
+    ctx = {
+        "flips": flips[::-1]
+    }
+    return render(request, "Flips/my-flips.html", context=ctx)
