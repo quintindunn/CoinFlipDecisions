@@ -13,14 +13,11 @@ function flip() {
 }
 
 function set_option(is_a) {
-  console.log(is_a);
   if (is_a) {
-    console.log(1);
     flipped = false;
     coin.dataset.flipped = "false";
     return
   }
-  console.log(2);
   flipped = true;
   coin.dataset.flipped = "true";
 }

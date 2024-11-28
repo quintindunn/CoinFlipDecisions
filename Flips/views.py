@@ -1,7 +1,8 @@
+import json
 import random
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
 
 from .models import Flip
@@ -56,6 +57,7 @@ def execute_flip(request, pk: str):
         return HttpResponseForbidden()
 
     ctx = {
+        "is_owner": flip.user == request.user,
         "flip": flip,
         "first_flip": False,
         "heads_chance": f"{int(flip.option_a_weight * 100)}%",
@@ -71,6 +73,26 @@ def execute_flip(request, pk: str):
     return render(request, "Flips/execute-flip.html", context=ctx)
 
 
+def rate(request):
+    request_data = json.loads(request.body)
+
+    uuid = request_data.get("flip-id")
+    value = request_data.get("value")
+
+    flip = request.user.flips.filter(uuid=uuid).first()
+
+    if flip.user != request.user:
+        return HttpResponseForbidden()
+
+    flip.outcome_rating = value
+    flip.save()
+    return HttpResponse("OK", status=200)
+
+    print(flip)
+
+    return HttpResponse("200")
+
+  
 def my_flips(request):
     flips = request.user.flips.all()
     ctx = {
