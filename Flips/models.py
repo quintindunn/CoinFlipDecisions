@@ -25,5 +25,8 @@ class Flip(models.Model):
         on_delete=models.CASCADE,
         related_name='flips'
     )
+
+    disabled = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     uuid = models.CharField(max_length=256, default=gen_id)

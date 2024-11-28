@@ -3,7 +3,7 @@ from Flips.models import Flip
 
 
 def home(request):
-    recent_flips = Flip.objects.filter(private=False).order_by('-id')[:10]
+    recent_flips = Flip.objects.filter(private=False, disabled=False).order_by('-id')[:10]
     ctx = {
         "flips": recent_flips
     }

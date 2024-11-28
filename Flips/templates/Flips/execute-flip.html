@@ -33,8 +33,19 @@
             </div>
         </div>
         <div class="options">
-
-            {% if first_flip %}
+            {% if is_owner %}
+                <div class="owner-options">
+                    <img id="delete" src="{% static 'Flips/trash.svg' %}">
+                    <div class="privacy">
+                        <p id="privacy-label">Private</p>
+                        <label class="switch">
+                          <input type="checkbox" id="privacy" name="private" {% if flip.private %}checked{% endif %} value="{{ flip.private|lower }}">
+                          <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            {% endif %}
+            {% if first_flip or True %}
                 <div class="flip">
                     <button id="execute-flip">Flip Coin!</button>
                 </div>
