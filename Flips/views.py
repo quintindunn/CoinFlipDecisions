@@ -95,8 +95,6 @@ def rate(request):
 def update_visibility(request):
     request_data = json.loads(request.body)
 
-    print(request_data)
-
     uuid = request_data.get("flip-id")
 
     flip = request.user.flips.filter(uuid=uuid, disabled=False).first()

@@ -5,7 +5,7 @@ let is_owner = document.getElementById("is-owner").value;
 let base_rating = +document.getElementById("base-rating").value;
 let delete_btn = document.getElementById("delete");
 let privacy_btn = document.getElementById("privacy");
-let is_private = false;
+let is_private = privacy_btn.value === "true";
 
 let rating_ids = ["bad", "neutral", "happy"];
 let rating_btns = [];
