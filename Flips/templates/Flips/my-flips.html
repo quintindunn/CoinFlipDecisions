@@ -1,0 +1,56 @@
+{% extends 'Core/core.html' %}
+{% load static %}
+
+{% block title %}My Flips{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Flips/view-flips.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <div class="heading">
+        <h1>My Flips</h1>
+    </div>
+    <div class="flips">
+        {% for flip in flips %}
+            <a href="{% url 'execute-flip' flip.uuid %}">
+                <div class="flip">
+                <div class="coin">
+                    <div class="label">
+                        {% if flip.outcome == 0 %}
+                            <p>Flip Now</p>
+                        {% elif flip.outcome == 1 %}
+                            <p>Heads</p>
+                        {% elif flip.outcome == 2 %}
+                            <p>Tails</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="options">
+                        <div class="option">
+                            <span class="options-type">Heads</span><span> - {{ flip.option_a }}</span>
+                        </div>
+                        <div class="option">
+                            <span class="options-type">Tails</span><span> - {{ flip.option_b }}</span>
+                        </div>
+                    </div>
+                    <div class="weights">
+                        {% if flip.private %}
+                            <div class="private">
+                                <img src="{% static 'Flips/lock.svg' %}" alt="private">
+                            </div>
+                        {% endif %}
+                        <div class="option">
+                            <span class="options-type">Heads: </span><span>{% widthratio flip.option_a_weight 1 100 %}%</span>
+                        </div>
+                        <div class="option">
+                            <span class="options-type">Tails: </span><span>{% widthratio flip.option_b_weight 1 100 %}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

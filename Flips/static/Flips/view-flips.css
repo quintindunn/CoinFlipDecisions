@@ -1,0 +1,83 @@
+.heading {
+    text-align: center;
+}
+
+.flips {
+    display: flex;
+    justify-self: center;
+    align-content: center;
+    flex-direction: column;
+    width: 40vw;
+    padding-bottom: 4vh;
+    gap: 2vh;
+}
+
+.flips > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.flip {
+    display: grid;
+    grid-template-columns: 11vh auto;
+    width: 40vw;
+    height: 11vh;
+    background-color: #fdfdfd;
+}
+
+.flip > .info {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 60% 40%;
+}
+
+.flip > .info > * {
+    display: flex;
+    flex-direction: column;
+}
+
+.flip > .info > * > .option {
+    margin: auto 0;
+}
+
+.flip > .info > * > .option > span.options-type {
+    font-weight: bold;
+    font-size: 140%;
+}
+
+.flip > .info > .weights > .private {
+    position: absolute;
+    right: 30.5vw;
+    margin-top: .5vw;
+}
+
+.flip > .info > .weights > .private > img {
+    aspect-ratio: 1/1;
+    height: 2vh;
+}
+
+.coin {
+    margin-top: 1.25vh;
+    display: flex;
+    justify-self: center;
+    width: 8vh;
+    height: 8vh;
+    background-color: var(--coin-bg-color);
+    border: 3px solid var(--coin-bd-color);
+    border-radius: 50%;
+}
+
+.coin > .label {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.coin > .label > p {
+    margin: 0;
+    position: relative;
+    font-weight: bold;
+    color: white;
+    top: calc(50% - 0.5em);
+}

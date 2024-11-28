@@ -1,6 +1,8 @@
 :root {
     --nav-bar-height: 6vh;
     --nav-bar-icons: 128;
+    --coin-bg-color: rgb(232, 210, 58);
+    --coin-bd-color: rgb(180, 157, 6);
 }
 
 body {

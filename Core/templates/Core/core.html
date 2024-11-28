@@ -26,7 +26,7 @@
                 </div>
                 {% if user.is_authenticated %}
                     <div id="my-flips">
-                        <a href="#myflips">
+                        <a href="{% url 'my-flips' %}">
                             <h4>My Flips</h4>
                         </a>
                     </div>
