@@ -47,3 +47,20 @@
 .results[data-hidden="true"] {
     display: none;
 }
+
+.ratings {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.ratings > .rating-btns > button {
+    width: 6vw;
+    height: 4vh;
+}
+
+.ratings > .rating-btns > button[data-selected="true"] {
+    background-color: rgba(232, 210, 58, 50%);
+}

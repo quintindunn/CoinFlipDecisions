@@ -25,7 +25,7 @@ class Flip(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='posts'
+        related_name='flips'
     )
     created_at = models.DateTimeField(auto_now_add=True)
     uuid = models.CharField(max_length=256, default=gen_id)

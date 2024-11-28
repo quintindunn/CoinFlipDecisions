@@ -11,6 +11,8 @@
 {% endblock head %}
 
 {% block content %}
+    {% csrf_token %}
+    <input type="hidden" id="flip-uuid" value="{{ flip.uuid }}">
     <input type="hidden" id="is-first-flip" value="{{ first_flip }}">
     <input type="hidden" id="outcome" value="{{ flip.outcome }}">
     <div class="content">
@@ -57,6 +59,15 @@
                     {% endif %}
                 </div>
 
+            </div>
+            <div class="ratings">
+                {# 0 == unrated, 1 == Bad, 2 == Neutral, 3 == Happy #}
+                <h1>Rating:</h1>
+                <div class="rating-btns">
+                    <button {% if not is_owner %}disabled{% endif %} id="bad" value="1" data-selected="{% if flip.outcome_rating == 1 %}true{% else %}false{% endif %}">Bad</button>
+                    <button {% if not is_owner %}disabled{% endif %} id="neutral" value="2" data-selected="{% if flip.outcome_rating == 2 %}true{% else %}false{% endif %}">Neutral</button>
+                    <button {% if not is_owner %}disabled{% endif %} id="happy" value="3" data-selected="{% if flip.outcome_rating == 3 %}true{% else %}false{% endif %}">Happy</button>
+                </div>
             </div>
         </div>
     </div>
