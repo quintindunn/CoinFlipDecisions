@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="{% static 'Flips/execute-flip.css' %}">
     <script src="{% static 'Flips/coin.js' %}" defer></script>
     <script src="{% static 'Flips/execute-flip.js' %}" defer></script>
+    <input type="hidden" id="flip-uuid" value="{{ flip.uuid }}">
+    <input type="hidden" id="is-first-flip" value="{{ first_flip }}">
+    <input type="hidden" id="is-owner" value="{{ is_owner.real }}">
+    <input type="hidden" id="base-rating" value="{{ flip.outcome_rating }}">
+    <input type="hidden" id="outcome" value="{{ flip.outcome }}">
 {% endblock head %}
 
 {% block content %}
     {% csrf_token %}
-    <input type="hidden" id="flip-uuid" value="{{ flip.uuid }}">
-    <input type="hidden" id="is-first-flip" value="{{ first_flip }}">
-    <input type="hidden" id="outcome" value="{{ flip.outcome }}">
     <div class="content">
         <div class="coin-box">
             <div class="coin">

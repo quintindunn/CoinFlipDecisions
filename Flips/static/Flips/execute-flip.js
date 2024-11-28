@@ -1,6 +1,8 @@
 let outcome = document.getElementById("outcome").value;
 let is_first_flip = document.getElementById("is-first-flip").value === "True";
 let flip_uuid = document.getElementById("flip-uuid").value;
+let is_owner = document.getElementById("is-owner").value;
+let base_rating = +document.getElementById("base-rating").value;
 
 let rating_ids = ["bad", "neutral", "happy"];
 let rating_btns = [];
@@ -8,6 +10,10 @@ let csrfmiddlewaretoken = document.querySelector(`input[name="csrfmiddlewaretoke
 
 
 function rating(e) {
+    if (!+is_owner) {
+        e.preventDefault();
+        return;
+    }
     let value = e.target.value;
     let xhr = new XMLHttpRequest();
 
@@ -17,10 +23,9 @@ function rating(e) {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                console.log("Rating submitted successfully:", xhr.responseText);
-            } else {
-                console.error("Failed to submit rating:", xhr.status, xhr.responseText);
+            if (xhr.status !== 200) {
+                update_ratings(base_rating)
+                console.error("Failed to submit rating:", xhr.status);
             }
         }
     };

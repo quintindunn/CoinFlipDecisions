@@ -59,8 +59,17 @@
 .ratings > .rating-btns > button {
     width: 6vw;
     height: 4vh;
+    cursor: pointer;
 }
 
 .ratings > .rating-btns > button[data-selected="true"] {
     background-color: rgba(232, 210, 58, 50%);
+}
+
+.ratings > .rating-btns > button[disabled] {
+    color: black;
+    border: 1px solid gray;
+  opacity: 1; /* Remove dimming effect */
+  pointer-events: none; /* Ensure it's not clickable */
+  cursor: default; /* Maintain default cursor */
 }
