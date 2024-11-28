@@ -1,0 +1,9 @@
+.flips {
+    margin-top: 4vh;
+}
+
+.flip > .info > .weights > .display-name {
+    position: absolute;
+    right: 30.5vw;
+    margin-top: -1vh;
+}

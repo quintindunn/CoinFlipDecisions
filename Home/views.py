@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from Flips.models import Flip
 
 
 def home(request):
-    return render(request, "home/home.html")
+    recent_flips = Flip.objects.filter(private=False).order_by('-id')[:10]
+    ctx = {
+        "flips": recent_flips
+    }
+    return render(request, "home/home.html", context=ctx)
