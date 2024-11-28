@@ -41,14 +41,14 @@ def new_flip(request):
     private = private == "true"
 
     flip = Flip(option_a=option_a_label, option_b=option_b_label, option_a_weight=1-weighting,
-                option_b_weight=weighting, private=private, user=request.user)
+                option_b_weight=weighting, private=private, user=request.user, disabled=False)
     flip.save()
 
     return redirect("execute-flip", pk=flip.uuid)
 
 
 def execute_flip(request, pk: str):
-    flip = Flip.objects.filter(uuid=pk).first()
+    flip = Flip.objects.filter(uuid=pk, disabled=False).first()
 
     if flip is None:
         return HttpResponseNotFound()
@@ -79,7 +79,10 @@ def rate(request):
     uuid = request_data.get("flip-id")
     value = request_data.get("value")
 
-    flip = request.user.flips.filter(uuid=uuid).first()
+    flip = request.user.flips.filter(uuid=uuid, disabled=False).first()
+
+    if not flip:
+        return HttpResponseNotFound()
 
     if flip.user != request.user:
         return HttpResponseForbidden()
@@ -88,13 +91,34 @@ def rate(request):
     flip.save()
     return HttpResponse("OK", status=200)
 
-    print(flip)
 
-    return HttpResponse("200")
+def update_visibility(request):
+    request_data = json.loads(request.body)
+
+    print(request_data)
+
+    uuid = request_data.get("flip-id")
+
+    flip = request.user.flips.filter(uuid=uuid, disabled=False).first()
+
+    if not flip:
+        return HttpResponseNotFound()
+
+    if flip.user != request.user:
+        return HttpResponseForbidden()
+
+    private = request_data.get("set_private")
+    remove = request_data.get("remove")
+
+    flip.private = private
+    flip.disabled = remove
+    flip.save()
+
+    return HttpResponse("OK", status=200)
 
   
 def my_flips(request):
-    flips = request.user.flips.all()
+    flips = request.user.flips.filter(disabled=False)
     ctx = {
         "flips": flips[::-1]
     }
