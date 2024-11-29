@@ -1,8 +1,9 @@
-import json
 import os.path
 import uuid
 
-import requests
+import urllib.request
+import json
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, get_user_model
 
@@ -23,16 +24,21 @@ GOOGLE_OAUTH_URI = (f"https://accounts.google.com/o/oauth2/v2/auth"
 
 def get_user_data(token_data):
     """
-    Gets the user's data from the Google API, i.e. email, Google id
-    :param token_data: Token gotten from oauth flow
+    Gets the user's data from the Google API, i.e. email, Google ID
+    :param token_data: Token obtained from OAuth flow
     :return: Dict with the user's data
     """
     url = "https://www.googleapis.com/userinfo/v2/me?access_token=" + token_data.get("access_token")
 
-    req = requests.get(url)
-    if req.status_code != 200:
-        raise RuntimeError(("Request error: ", req.status_code, req.text))
-    return req.json()
+    try:
+        with urllib.request.urlopen(url) as response:
+            if response.status != 200:
+                raise RuntimeError("Request error: ", response.status, response.read().decode())
+            return json.loads(response.read().decode())
+    except urllib.error.HTTPError as e:
+        raise RuntimeError("Request error: ", e.code, e.read().decode())
+    except urllib.error.URLError as e:
+        raise RuntimeError("Request error: ", e.reason)
 
 
 def sign_up_with_google(request):
@@ -59,8 +65,14 @@ def google_oauth_handler(request):
 
         return base_url
 
-    request_token = requests.post(url_builder())
-    request_data = request_token.json()
+    req = urllib.request.Request(url_builder(), method="POST")
+    try:
+        with urllib.request.urlopen(req) as response:
+            request_data = json.loads(response.read().decode())
+    except urllib.error.HTTPError as e:
+        raise RuntimeError("Request error: ", e.code, e.read().decode())
+    except urllib.error.URLError as e:
+        raise RuntimeError("Request error: ", e.reason)
 
     user_data = get_user_data(request_data)
     user = get_user_model().objects.all().filter(google_id=user_data['id']).first()
