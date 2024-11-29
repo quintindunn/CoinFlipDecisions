@@ -7,7 +7,7 @@ import json
 from .models import User
 
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, logout, get_user_model
 
 from django.contrib.auth import views as auth_views
 from django.conf import settings
@@ -135,6 +135,14 @@ def check_display_name(request):
     valid = users == 0
     return HttpResponse(str(valid).lower())
 
+
+def logout_user(request):
+    if not request.user.is_authenticated:
+        return redirect("home")
+
+    logout(request)
+
+    return redirect("home")
 
 class LoginView(auth_views.LoginView):
     template_name = 'Users/login.html'
