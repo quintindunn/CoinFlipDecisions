@@ -1,0 +1,47 @@
+.set-display-name {
+    width: 60vw;
+    margin: 5vh auto;
+    padding: 2vh 2vw 5vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    background-color: #fdfdfd;
+}
+
+.set-display-name > .form > .display-name {
+    display: flex;
+    flex-direction: column;
+    gap: .25vh 1vw;
+    text-align: center;
+    font-weight: bold;
+    font-size: 115%;
+}
+
+#display-name {
+    border-radius: 5px;
+    height: 1rem;
+    border: 1px solid lightblue;
+    padding: 0.25rem;
+}
+
+.set-display-name > .form > button {
+    margin-top: 2vh;
+    width: 10vw;
+    height: 4vh;
+    border-radius: 25px;
+    background-color: #ffffff;
+    border: 2px solid lightblue;
+    cursor: pointer;
+}
+
+.non-distinctive-display-name {
+    display: flex;
+    position: absolute;
+    top: calc(var(--nav-bar-height) + 18vh);
+    color: darkred;
+}
+
+.non-distinctive-display-name[data-hidden="true"] {
+    display: none;
+}

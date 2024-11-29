@@ -1,0 +1,87 @@
+{% extends 'Core/core.html' %}
+{% load static %}
+
+{% block title %}New Flip{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Flips/coin.css' %}">
+    <link rel="stylesheet" href="{% static 'Flips/execute-flip.css' %}">
+    <script src="{% static 'Flips/coin.js' %}" defer></script>
+    <script src="{% static 'Flips/execute-flip.js' %}" defer></script>
+    <input type="hidden" id="flip-uuid" value="{{ flip.uuid }}">
+    <input type="hidden" id="is-first-flip" value="{{ first_flip }}">
+    <input type="hidden" id="is-owner" value="{{ is_owner.real }}">
+    <input type="hidden" id="base-rating" value="{{ flip.outcome_rating }}">
+    <input type="hidden" id="outcome" value="{{ flip.outcome }}">
+{% endblock head %}
+
+{% block content %}
+    {% csrf_token %}
+    <div class="content">
+        <div class="coin-box">
+            <div class="coin">
+                <div class="coin-face coin-face-a">
+                    <div class="label">
+                        <p>Heads</p>
+                    </div>
+                </div>
+                <div class="coin-face coin-face-b">
+                    <div class="label">
+                        <p>Tails</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="options">
+            {% if is_owner %}
+                <div class="owner-options">
+                    <img id="delete" src="{% static 'Flips/trash.svg' %}">
+                    <div class="privacy">
+                        <p id="privacy-label">Private</p>
+                        <label class="switch">
+                          <input type="checkbox" id="privacy" name="private" {% if flip.private %}checked{% endif %} value="{{ flip.private|lower }}">
+                          <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            {% endif %}
+            {% if first_flip or True %}
+                <div class="flip">
+                    <button id="execute-flip">Flip Coin!</button>
+                </div>
+            {% endif %}
+            <div class="outcome-meaning">
+                <div class="heads">
+                    <h2>Heads - {{ heads_chance }} Chance</h2>
+                    <p>{{ flip.option_a }}</p>
+                </div>
+                <div class="tails">
+                    <h2>Tails - {{ tails_chance }} Chance</h2>
+                    <p>{{ flip.option_b }}</p>
+                </div>
+            </div>
+            <div class="results" id="results" data-hidden="{% if first_flip %}true{% else %}false{% endif %}">
+                <div class="heading">
+                    <h1>Result:</h1>
+                </div>
+                <div class="result">
+                    {% if flip.outcome == 1 %}
+                        <h2>Heads - {{ flip.option_a }}</h2>
+                    {% else %}
+                        <h2>Tails - {{ flip.option_b }}</h2>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="ratings">
+                {# 0 == unrated, 1 == Bad, 2 == Neutral, 3 == Happy #}
+                <h1>Rating:</h1>
+                <div class="rating-btns">
+                    <button {% if not is_owner %}disabled{% endif %} id="bad" value="1" data-selected="{% if flip.outcome_rating == 1 %}true{% else %}false{% endif %}">Bad</button>
+                    <button {% if not is_owner %}disabled{% endif %} id="neutral" value="2" data-selected="{% if flip.outcome_rating == 2 %}true{% else %}false{% endif %}">Neutral</button>
+                    <button {% if not is_owner %}disabled{% endif %} id="happy" value="3" data-selected="{% if flip.outcome_rating == 3 %}true{% else %}false{% endif %}">Happy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

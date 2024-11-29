@@ -1,0 +1,23 @@
+{% extends 'Core/core.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Users/set-display-name.css' %}">
+    <script src="{% static 'Users/set-display-name.js' %}" defer></script>
+{% endblock head %}
+
+{% block content %}
+    <div class="set-display-name">
+        <div class="form">
+            {% csrf_token %}
+            <div class="display-name">
+                <label for="display-name">Display Name</label>
+                <input type="text" name="display-name" id="display-name" placeholder="Display Name">
+            </div>
+            <button type="submit" id="submit">Set Display Name</button>
+        </div>
+        <div class="non-distinctive-display-name" data-hidden="true" id="bad-name">
+            <p></p>
+        </div>
+    </div>
+{% endblock content %}
