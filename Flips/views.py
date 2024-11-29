@@ -1,6 +1,8 @@
 import json
 import random
 
+from Core.decorators import check_display_name
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
@@ -8,6 +10,7 @@ from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpRespon
 from .models import Flip
 
 
+@check_display_name
 @login_required()
 def new_flip(request):
     if request.method == "GET":
@@ -40,13 +43,14 @@ def new_flip(request):
     weighting = weighting / 100
     private = private == "true"
 
-    flip = Flip(option_a=option_a_label, option_b=option_b_label, option_a_weight=1-weighting,
+    flip = Flip(option_a=option_a_label, option_b=option_b_label, option_a_weight=1 - weighting,
                 option_b_weight=weighting, private=private, user=request.user, disabled=False)
     flip.save()
 
     return redirect("execute-flip", pk=flip.uuid)
 
 
+@check_display_name
 def execute_flip(request, pk: str):
     flip = Flip.objects.filter(uuid=pk, disabled=False).first()
 
@@ -73,6 +77,7 @@ def execute_flip(request, pk: str):
     return render(request, "Flips/execute-flip.html", context=ctx)
 
 
+# TODO: VALIDATION
 def rate(request):
     request_data = json.loads(request.body)
 
@@ -114,7 +119,8 @@ def update_visibility(request):
 
     return HttpResponse("OK", status=200)
 
-  
+
+@check_display_name
 def my_flips(request):
     flips = request.user.flips.filter(disabled=False)
     ctx = {
