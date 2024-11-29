@@ -108,7 +108,6 @@ def set_display_name(request):
     name = json.loads(request.body).get("displayname")
 
     if not name or len(name) < 5:
-        print(name)
         return HttpResponseBadRequest()
 
     users = User.objects.filter(display_name=name).count()
