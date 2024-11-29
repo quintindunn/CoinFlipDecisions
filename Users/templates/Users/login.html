@@ -1,0 +1,21 @@
+{% extends 'Core/core.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'Users/login.css' %}">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+{% endblock head %}
+
+{% block content %}
+    <div class="inner">
+        <h1 class="heading">Login Now!</h1>
+        <div class="login">
+            <a href="{{ google_oauth_uri }}" style="text-decoration: none">
+                <div class="google-login">
+                    <img src="{% static 'Users/google_svg.png' %}" alt="Google">
+                    <p>Sign in with Google</p>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock content %}
