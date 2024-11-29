@@ -5,7 +5,11 @@ from Core.decorators import check_display_name
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, HttpResponse
-from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
+from django.http import (
+    HttpResponseBadRequest,
+    HttpResponseNotFound,
+    HttpResponseForbidden,
+)
 
 from .models import Flip
 
@@ -43,8 +47,15 @@ def new_flip(request):
     weighting = weighting / 100
     private = private == "true"
 
-    flip = Flip(option_a=option_a_label, option_b=option_b_label, option_a_weight=1 - weighting,
-                option_b_weight=weighting, private=private, user=request.user, disabled=False)
+    flip = Flip(
+        option_a=option_a_label,
+        option_b=option_b_label,
+        option_a_weight=1 - weighting,
+        option_b_weight=weighting,
+        private=private,
+        user=request.user,
+        disabled=False,
+    )
     flip.save()
 
     return redirect("execute-flip", pk=flip.uuid)
@@ -57,7 +68,9 @@ def execute_flip(request, pk: str):
     if flip is None:
         return HttpResponseNotFound()
 
-    if flip.private and (not request.user.is_authenticated or request.user != flip.user):
+    if flip.private and (
+        not request.user.is_authenticated or request.user != flip.user
+    ):
         return HttpResponseForbidden()
 
     ctx = {
@@ -65,12 +78,14 @@ def execute_flip(request, pk: str):
         "flip": flip,
         "first_flip": False,
         "heads_chance": f"{int(flip.option_a_weight * 100)}%",
-        "tails_chance": f"{int(flip.option_b_weight * 100)}%"
+        "tails_chance": f"{int(flip.option_b_weight * 100)}%",
     }
 
     # Process it server-side to prevent people from making false HTTP requests
     if flip.outcome == 0:
-        flip.outcome = int(random.random() > flip.option_a_weight) + 1  # 0 == not processed, 1 == Heads 2, == Tails
+        flip.outcome = (
+            int(random.random() > flip.option_a_weight) + 1
+        )  # 0 == not processed, 1 == Heads 2, == Tails
         flip.save()
         ctx["first_flip"] = True
 
@@ -123,7 +138,5 @@ def update_visibility(request):
 @check_display_name
 def my_flips(request):
     flips = request.user.flips.filter(disabled=False)
-    ctx = {
-        "flips": flips[::-1]
-    }
+    ctx = {"flips": flips[::-1]}
     return render(request, "Flips/my-flips.html", context=ctx)

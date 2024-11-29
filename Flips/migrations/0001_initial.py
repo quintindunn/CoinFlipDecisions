@@ -16,20 +16,35 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Flip',
+            name="Flip",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('private', models.BooleanField(default=False)),
-                ('option_a', models.CharField(default='Heads', max_length=128)),
-                ('option_a_weight', models.FloatField(default=0.5)),
-                ('option_b', models.CharField(default='Tails', max_length=128)),
-                ('option_b_weight', models.FloatField(default=0.5)),
-                ('outcome', models.IntegerField(default=0)),
-                ('outcome_rating', models.IntegerField(default=0)),
-                ('disabled', models.BooleanField(default=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('uuid', models.CharField(default=Flips.models.gen_id, max_length=256)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='flips', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("private", models.BooleanField(default=False)),
+                ("option_a", models.CharField(default="Heads", max_length=128)),
+                ("option_a_weight", models.FloatField(default=0.5)),
+                ("option_b", models.CharField(default="Tails", max_length=128)),
+                ("option_b_weight", models.FloatField(default=0.5)),
+                ("outcome", models.IntegerField(default=0)),
+                ("outcome_rating", models.IntegerField(default=0)),
+                ("disabled", models.BooleanField(default=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("uuid", models.CharField(default=Flips.models.gen_id, max_length=256)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="flips",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
