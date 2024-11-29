@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+.heading {
+    padding: 0;
+    text-align: center;
+    font-family: "JetBrains Mono", serif;
+
+    font-size: 4vh;
+}
+
+.login {
+    margin: 0 auto 2vh;
+    background: #FAFAFA;
+    border: 0.02vw solid #dbdbdb;
+    width: 25vw;
+    height: 0;
+    padding: 1vw 1vh 10vh;
+}
+
+.google-login > img {
+    position: relative;
+    left: .5vw;
+    margin: auto 0;
+    width: 1.5vw;
+    aspect-ratio: 1/1;
+}
+
+.google-login {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    border: 1px solid #d2d2d2;
+    background-color: #FFFFFF;
+    border-radius: 0.5vw;
+    width: 12vw;
+    height: 4vh;
+    padding: .5vw;
+}
+
+.google-login > p {
+    text-decoration: none;
+    font-family: "Roboto", serif;
+    font-weight: lighter;
+    color: #757575;
+    font-size: 2vh;
+    margin: auto;
+}
+
+.google-login:hover {
+    background-color: #fbfbfb;
+}

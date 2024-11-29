@@ -1,0 +1,5 @@
+This file is so the directory doesn't get removed.
+
+In this directory, place a google_oauth.json file.
+Generate this file from the google cloud console, create an oauth 2.0 client, and download the json file.
+Rename it to google_oauth.json, and place it in this directory.

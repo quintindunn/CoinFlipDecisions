@@ -35,19 +35,17 @@
                             <h4>New Flip</h4>
                         </a>
                     </div>
-                    <div id="account">
-                        <a href="#profile">
-                            <div class="nav-bar-content-img">
-                                <img class="nav-bar-account-img" src="{% static 'Core/account.svg' %}" alt="Profile">
-                            </div>
-                        </a>
-                    </div>
+                    <a href="{% url 'users-logout' %}">
+                        <div id="account">
+                            <h4>Sign Out</h4>
+                        </div>
+                    </a>
                 {% else %}
-                    <div id="account">
-                        <a href="#signinlogin">
+                    <a href="{% url 'users-login' %}">
+                        <div id="account">
                             <h4>Sign In | Login</h4>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 {% endif %}
             </div>
         </div>

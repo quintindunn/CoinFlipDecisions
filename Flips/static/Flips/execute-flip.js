@@ -73,8 +73,6 @@ function send_visibility_update(del, priv) {
 
     let data = JSON.stringify(updates);
     xhr.send(data);
-
-
 }
 
 function del() {
