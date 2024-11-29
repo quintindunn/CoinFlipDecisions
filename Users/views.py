@@ -4,12 +4,15 @@ import uuid
 import urllib.request
 import json
 
-from django.shortcuts import render, redirect
+from .models import User
+
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import login, get_user_model
 
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 
+from django.http import HttpResponseNotAllowed, HttpResponseBadRequest
 auth_file = os.path.join(settings.BASE_DIR, "oauth", "google_oauth.json")
 
 with open(auth_file, 'r') as f:
@@ -85,10 +88,53 @@ def google_oauth_handler(request):
         )
         new_user.save()
         login(request, new_user)
+        user = new_user
     else:
         login(request, user)
 
+    if not user.display_name:
+        return redirect("set-display-name")
+
     return redirect("home")
+
+
+def set_display_name(request):
+    if request.method == "GET":
+        return render(request, "Users/set-display-name.html")
+
+    if request.method != "POST":
+        return HttpResponseNotAllowed(permitted_methods=["GET", "POST"])
+
+    name = json.loads(request.body).get("displayname")
+
+    if not name or len(name) < 5:
+        print(name)
+        return HttpResponseBadRequest()
+
+    users = User.objects.filter(display_name=name).count()
+    valid = users == 0
+
+    if not valid:
+        return HttpResponse("Name already taken", status=409)
+
+    request.user.display_name = name
+    request.user.save()
+
+    return redirect("home")
+
+
+def check_display_name(request):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(permitted_methods="POST")
+
+    data = json.loads(request.body)
+    new_name = data.get("displayname")
+    if not new_name:
+        return HttpResponseBadRequest()
+
+    users = User.objects.filter(display_name=new_name).count()
+    valid = users == 0
+    return HttpResponse(str(valid).lower())
 
 
 class LoginView(auth_views.LoginView):
