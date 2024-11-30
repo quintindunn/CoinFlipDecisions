@@ -10,6 +10,7 @@ let is_private = privacy_btn.value === "true";
 let rating_ids = ["bad", "neutral", "happy"];
 let rating_btns = [];
 let csrfmiddlewaretoken = document.querySelector(`input[name="csrfmiddlewaretoken"]`).value;
+let delete_return_url = document.getElementById("delete-return-url").value;
 
 
 function rating(e) {
@@ -77,6 +78,7 @@ function send_visibility_update(del, priv) {
 
 function del() {
     send_visibility_update(true, false);
+    window.location = delete_return_url;
 }
 
 function set_privacy(privacy) {

@@ -13,6 +13,7 @@
     <input type="hidden" id="is-owner" value="{{ is_owner.real }}">
     <input type="hidden" id="base-rating" value="{{ flip.outcome_rating }}">
     <input type="hidden" id="outcome" value="{{ flip.outcome }}">
+    <input type="hidden" id="delete-return-url" value="{% url 'my-flips' %}">
 {% endblock head %}
 
 {% block content %}
