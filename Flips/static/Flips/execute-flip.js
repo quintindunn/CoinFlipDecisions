@@ -69,6 +69,9 @@ function send_visibility_update(del, priv) {
             if (xhr.status !== 200) {
                 console.error("Failed to submit rating:", xhr.status);
             }
+            else if (del) {
+                window.location.replace(delete_return_url);
+            }
         }
     };
 
@@ -78,7 +81,6 @@ function send_visibility_update(del, priv) {
 
 function del() {
     send_visibility_update(true, false);
-    window.location = delete_return_url;
 }
 
 function set_privacy(privacy) {
